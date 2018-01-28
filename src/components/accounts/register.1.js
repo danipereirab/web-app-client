@@ -1,13 +1,19 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-import * as actions from './actions';
+
 
 const Register = (props) => {
-    const { handleSubmit, pristine, reset, submitting, text } = props
+    
+    const { handleSubmit, pristine, reset, submitting, text, response } = props
+    console.log(props)
         return(
-        <div class="col-sm-5">
-                        <h4>{text}</h4>
-                        <form class='form-group'> 
+          
+            <div className="col-sm-5">
+             <button type="button" onClick={() => load(data)}>
+          Load Account
+        </button>
+                        <b>{text}</b>
+                        <form className='form-group' onSubmit={props.onSubmit}>
                         <Field
                             name="username"
                             component={renderField}
@@ -16,6 +22,7 @@ const Register = (props) => {
                             warn={alphaNumeric}
                             type="text"
                             placeholder="User Name"
+                           
                             
                         />
                         <Field
@@ -26,6 +33,7 @@ const Register = (props) => {
                             warn={aol}
                             type="email"
                             placeholder="Email"
+                   
                             
                         />
                         <Field
@@ -36,7 +44,7 @@ const Register = (props) => {
                             warn={aol}
                             type="email"
                             placeholder="Repeat Email"
-                            
+                       
                         />
                         <Field
                             name="password"
@@ -46,6 +54,7 @@ const Register = (props) => {
                             warn={aol}
                             type="password"
                             placeholder="Password"
+                     
                             
                         />
                         <Field
@@ -56,11 +65,13 @@ const Register = (props) => {
                             warn={aol}
                             type="password"
                             placeholder="Repeat password"
+                   
                             
                         />
                         <button type="submit" disabled={pristine || submitting}>
                             Registrar
                         </button>
+                        <small>{response}</small>
                         </form>
                     </div>
             )
@@ -89,16 +100,17 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => (
-  <div class="form-group">
+  <div className="form-group">
   
-      <input {...input} placeholder={label} type={type} class="form-control"/>
+      <input {...input} placeholder={label} type={type} className="form-control"/>
       {touched &&
-        ((error && <small class="help-block"> {error}</small>) ||
-          (warning && <small class="help-block"> {warning}</small>))}
+        ((error && <small className="help-block"> {error}</small>) ||
+          (warning && <small className="help-block"> {warning}</small>))}
     
   </div>
 )
 
+
 export default reduxForm({
-    form: 'Register'  // a unique identifier for this form
+    form: 'Register'
 })(Register);

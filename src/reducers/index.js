@@ -1,14 +1,17 @@
 import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import registration from './account-reducers'
+import account from '../reducers/accounts/account-reducers'
 import counter from './counter-reducers';
+
+import {reducer as fetchReducer} from 'react-redux-fetch';
 
 
 const reducers = {
   // ... your other reducers here ...
   counter,
-  registration,
-  form: formReducer     // <---- Mounted at 'form'
+  account,
+  form: formReducer,     // <---- Mounted at 'form'
+  repository: fetchReducer
 }
 const reducer = combineReducers(reducers)
 const store = createStore(reducer)

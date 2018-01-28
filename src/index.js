@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import Nav from './components/Navigation';
-import App from './App';
+import './resources/css/index.css';
 import {Provider} from 'react-redux';
 import configureStore from './store/configure-store';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom'
 
 const store = configureStore();
 
 
-ReactDOM.render(<Provider store={store}>
-  <Nav />
-</Provider>, document.getElementById('nav'))
+
 
 ReactDOM.render(<Provider store={store}>
-  <App />
-</Provider>, document.getElementById('section'))
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+</Provider>, document.getElementById('root'))
 registerServiceWorker();
