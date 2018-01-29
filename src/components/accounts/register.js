@@ -4,8 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 
 const Register = (props) => {
     
-    const { handleSubmit, pristine, reset, submitting, text, response, account } = props
-    
+    const { handleSubmit, pristine, reset, submitting, text, response, account, isFetching } = props
+        console.log(isFetching)
         return(
           
             <div className="col-sm-5">
@@ -27,6 +27,8 @@ const Register = (props) => {
                         <button type="submit" disabled={pristine || submitting}>
                             Registrar
                         </button>
+                        
+                        {isFetching ? <i className="fa fa-circle-o-notch fa-spin" ></i> : ''}
                         <small>{response}</small>
                         </form>
                     </div>

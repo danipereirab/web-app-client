@@ -17,7 +17,7 @@ class RegisterContainer extends React.Component {
             decrementar={this.props.actions.decValue}/> // Acción que pasamos desde el contenedor al componente vista. De las posibles acciones a despachar recogidas por bindActionCreators
       */
         <div>
-            <Register text={this.props.text} onSubmit={this.props.actions.addUserFailure} response={this.props.response} />
+            <Register text={this.props.text} onSubmit={this.props.actions.addUser} response={this.props.response} isFetching ={this.props.isFetching} />
         </div>
         )
     }
@@ -27,7 +27,8 @@ RegisterContainer.propTypes = {
     account : PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
     text: PropTypes.string.isRequired,
-    response : PropTypes.string.isRequired
+    response : PropTypes.string.isRequired,
+    isFetching : PropTypes.bool.isRequired,
   };
 
 
@@ -35,14 +36,13 @@ RegisterContainer.propTypes = {
     return {
         account: state.account, //Lo asignamos al props.account del contenedor y que pasará al componente vista.
         text : 'Feel free! Register a new account...',
-        response : state.account.response
+        response : state.account.response,
+        isFetching : state.account.isFetching
     };
   }
   
   function mapDispatchToProps(dispatch) { //¿Qué acciónes podemos a despachar?. Las definidias por CounterActions.
-    console.log(AccountActions)
-    return {
-      
+    return { 
       actions: bindActionCreators(AccountActions, dispatch)
     }
   }
