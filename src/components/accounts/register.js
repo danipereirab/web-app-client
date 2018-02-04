@@ -1,13 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-
+import { BrowserRouter, Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
 const Register = (props) => {
     
-    const { handleSubmit, pristine, reset, submitting, text, response, account, isFetching } = props
-        console.log(isFetching)
+    const { handleSubmit, text, response, account, isFetching, button, didInvalidate, isAuthenticated } = props
+    if(isAuthenticated){
+        <Redirect to="/profile"/>
+    }
         return(
-          
             <div className="col-sm-5">
            
                         <b>{text}</b>
@@ -17,19 +18,58 @@ const Register = (props) => {
                             component={renderField}
                             label="Username"
                             validate={[required, maxLength15, minLength2]}
-                            warn={alphaNumeric}
+                            //warn={alphaNumeric}
                             type="text"
                             placeholder="User Name"
                            
                             
                         />
+
+                        <Field
+                            name="email"
+                            component={renderField}
+                            label="Email"
+                            validate={[required,email]}
+                            warn={aol}
+                            type="email"
+                            placeholder="Email"
+                        />
+                        <Field
+                            name="confirmEmail"
+                            component={renderField}
+                            label="Confirm email"
+                            validate={[required,email]}
+                            warn={aol}
+                            type="email"
+                            placeholder="Repeat Email"
+                        />
+                        <Field
+                            name="password"
+                            component={renderField}
+                            label="Password"
+                            validate={[required, maxLength15, minLength8]}
+                            warn={aol}
+                            type="password"
+                            placeholder="Password"
+                        />
+                        <Field
+                            name="confirmPassword"
+                            component={renderField}
+                            label="Confirm password"
+                            validate={[required, maxLength15, minLength8]}
+                            warn={aol}
+                            type="password"
+                            placeholder="Repeat password"
+                        />
                         
-                        <button type="submit" disabled={pristine || submitting}>
-                            Registrar
+                        <button type="submit" disabled={ isFetching}>
+                        {isFetching ? <div> {button} <i className="fa fa-circle-o-notch fa-spin" ></i></div> : 'Register'}
                         </button>
-                        
-                        {isFetching ? <i className="fa fa-circle-o-notch fa-spin" ></i> : ''}
-                        <small>{response}</small>
+                        <br/>
+                       
+                        <div className={didInvalidate ? 'alert alert-danger': isAuthenticated ? 'alert alert-success':''}>
+                            <small><b>{response}</b></small>
+                        </div>
                         </form>
                     </div>
             )

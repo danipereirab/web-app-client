@@ -1,51 +1,18 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-import { BrowserRouter, Route, Redirect, Switch, withRouter} from 'react-router-dom';
 
-const Login = (props) => {
+const Profile = (props) => {
     
-    const { handleSubmit, text, response, account, isFetching, button, didInvalidate, isAuthenticated } = props
-    if(isAuthenticated){
-        return <Redirect to="/profile"/>
-    }    
-    return(
+    const { handleSubmit, text, response, account, isFetching, button, didInvalidate, isAuthenticated, session } = props
+        return(
           
             <div className="col-sm-5">
            
                         <b>{text}</b>
                         <form className='form-group' onSubmit={handleSubmit}>
-
-                        <Field
-                            name="username"
-                            component={renderField}
-                            label="Username"
-                            validate={[required, maxLength15, minLength2]}
-                            //warn={alphaNumeric}
-                            type="text"
-                            placeholder="User Name"
-                           
-                            
-                        />
-
-                  
-                        <Field
-                            name="password"
-                            component={renderField}
-                            label="Password"
-                            validate={[required, maxLength15, minLength8]}
-                            warn={aol}
-                            type="password"
-                            placeholder="Password"
-                        />
-                  
-                        <button type="submit" disabled={ isFetching}>
-                        {isFetching ? <div> {button} <i className="fa fa-circle-o-notch fa-spin" ></i></div> : 'Log in'}
-                        </button>
-                        <br/>
-                       
-                        <div className={didInvalidate ? 'alert alert-danger': isAuthenticated ? 'alert alert-success':''}>
-                            <small><b>{response}</b></small>
-                        </div>
+                            <p>Welcome !</p>
+                            <br/>
+                   
                         </form>
                     </div>
             )
@@ -85,6 +52,6 @@ const renderField = ({
 )
 
 
-export default reduxForm(withRouter({
-    form: 'Login'
-}))(Login);
+export default reduxForm({
+    form: 'Profile'
+})(Profile);

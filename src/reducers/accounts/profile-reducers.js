@@ -1,16 +1,13 @@
-import * as types from '../../actions/action-types';
+import * as types from '../../actions/accounts/action-types';
 
 
-const initialState = {
-    value: ""
-  }
-  
-  export default function  posts(state = {
+  export default function  post(state = {
     isFetching: false,
-    didInvalidate: false
+    didInvalidate: false,
+    response: '',
   }, action) {
     switch (action.type) {
-      case types.ADD_USER_FAILURE:
+      case types.GET_PROFILE_REQUEST:
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: true,
@@ -18,7 +15,7 @@ const initialState = {
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.ADD_USER:
+      case types.GET_PROFILE_SUCCESS:
         return Object.assign({}, state, {
           isFetching: true,
           didInvalidate: false,
@@ -26,7 +23,8 @@ const initialState = {
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.ADD_USER_SUCCESS:
+      case types.GET_PROFILE_FAILURE:
+        
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: false,
@@ -38,3 +36,5 @@ const initialState = {
         return state
     }
   }
+
+  
