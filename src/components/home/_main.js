@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Home from '../home/home'
-import LoginContainer from '../../containers/accounts/login-container'
-import RegisterContainer from '../../containers/accounts/register-container'
+import SignInContainer from '../../containers/accounts/signin-container'
+import SignUpContainer from '../../containers/accounts/signup-container'
 import ProfileContainer from '../../containers/accounts/profile-container'
 import Error401 from '../errors/error401'
 import Error404 from '../errors/error404'
@@ -16,8 +16,8 @@ const _Main = (props) => {
                 <section id="section">
                 <Switch>
                     <Route exact path='/'   component={Home}/>
-                    <Route path='/login'    component={LoginContainer}/>
-                    <Route path='/register' component={RegisterContainer}/>
+                    <Route path='/signin'    component={SignInContainer}/>
+                    <Route path='/signup' component={SignUpContainer}/>
                    
                     <Route path='/profile' componet={ProfileContainer} render={() => (isAuthenticated ? (<ProfileContainer />) : (<Error401/>))}/>
                     

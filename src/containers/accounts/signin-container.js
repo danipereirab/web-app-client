@@ -1,12 +1,11 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import Register from '../../components/accounts/register'
+import SignIn from '../../components/accounts/signin'
 import * as  SessionActions from '../../actions/accounts/session-actions'
 
-
-export class RegisterContainer extends React.Component { 
+export class SignInContainer extends React.Component { 
     render() {
       //console.log(this.props)
       return (
@@ -15,9 +14,9 @@ export class RegisterContainer extends React.Component {
             decrementar={this.props.actions.decValue}/> // Acción que pasamos desde el contenedor al componente vista. De las posibles acciones a despachar recogidas por bindActionCreators
       */
         <div>
-            <Register 
+            <SignIn 
               text={this.props.text} 
-              onSubmit={this.props.actions.addUserAsync} 
+              onSubmit={this.props.actions.signInAsync} 
               response={this.props.response} 
               isFetching ={this.props.isFetching} 
               button ={this.props.button}
@@ -28,7 +27,7 @@ export class RegisterContainer extends React.Component {
     }
 }
 
-RegisterContainer.propTypes = {
+SignInContainer.propTypes = {
     session : PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
     text: PropTypes.string.isRequired,
@@ -43,7 +42,7 @@ RegisterContainer.propTypes = {
   function mapStateToProps(state, props) {  
     return {
         session: state.session, 
-        text : 'Feel free! Register a new account...',
+        text : 'Sign in...',
         response : state.session.response,
         isFetching : state.session.isFetching,
         button : state.session.button,
@@ -61,4 +60,4 @@ RegisterContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RegisterContainer)
+)(SignInContainer)

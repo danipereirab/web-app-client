@@ -7,7 +7,7 @@ const Error401 = (props) => {
           
             <div className="text-centered">
                 <h2>Unauthorized</h2>
-                <h3>Would you like to log in page <Link to="/login">Log in</Link> instead?</h3>
+                <h3>Would you like to log in page <Link to="/signin">Log in</Link> instead?</h3>
             </div>
             )
 }

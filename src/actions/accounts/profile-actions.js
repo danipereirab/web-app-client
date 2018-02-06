@@ -35,7 +35,7 @@ export function getProfile(user) {
       dispatch(getProfile(user));
       dispatch(getProfileSuccess(user));
      
-      /*return fetch('http://localhost:5000/api/account/register', 
+      /*return fetch('http://localhost:5000/api/account/signup', 
       {
         method:'POST',
         cache: 'default',
@@ -53,7 +53,7 @@ export function getProfile(user) {
         {
           if(response.ok) {
             
-            // If login was successful, set the token in local storage and dispacth success action
+            // If signin was successful, set the token in local storage and dispacth success action
             localStorage.setItem('jwt', userLogged.token)
             dispatch(addUserSuccess(userLogged))
             getpro

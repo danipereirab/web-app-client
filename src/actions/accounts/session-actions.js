@@ -1,90 +1,89 @@
 import * as types from '../accounts/action-types';
 import fetch from 'isomorphic-fetch'
-import profile, { getProfile, getProfileAsync } from '../accounts/profile-actions'
 
 
 
-export function addUser(user) {
+export function signUp(user) {
   return {
-    type: types.ADD_USER_REQUEST,
+    type: types.SIGN_UP_REQUEST,
     user,
     button : 'Creating account...',
     response: '',
     receivedAt: Date.now()
   }
 }
-export function addUserSuccess(user) {
+export function signUpSuccess(user) {
   return {
-    type: types.ADD_USER_SUCCESS,
+    type: types.SIGN_UP_SUCCESS,
     user,
-    button : 'Register',
+    button : 'Sign Up',
     response: 'Account created successfuly... Now you can log in',
     receivedAt: Date.now()
   }
 }
-export function addUserFailure(user,error) {
+export function signUpFailure(user,error) {
   return {
-    type: types.ADD_USER_FAILURE,
+    type: types.SIGN_UP_FAILURE,
     user,
-    button : 'Register',
+    button : 'Sign Up',
     response: 'Failure to create the account... Please try it again later.',
     receivedAt: Date.now()
   }
 }
 
-export function login(user) {
+export function signIn(user) {
   return {
-    type: types.LOGIN_REQUEST,
+    type: types.SIGNIN_REQUEST,
     user,
-    button : 'Log in...',
+    button : 'Sign in...',
     response: '',
     receivedAt: Date.now()
   }
 }
-export function loginSuccess(user) {
+export function signInSuccess(user) {
   return {
-    type: types.LOGIN_SUCCESS,
+    type: types.SIGNIN_SUCCESS,
     user,
-    button : 'Log in',
+    button : 'Sign in',
     response: 'You are in.',
     receivedAt: Date.now()
   }
 }
-export function loginFailure(user,error) {
+export function signInFailure(user,error) {
   return {
-    type: types.LOGIN_FAILURE,
+    type: types.SIGNIN_FAILURE,
     user,
-    button : 'Log in',
-    response: 'Failure login... Please try it again later.',
+    button : 'Sign in',
+    response: 'Failure signing in... Please try it again later.',
     receivedAt: Date.now()
   }
 }
 
-export function logOut(user) {  
+export function signOut(user) {  
   return {
-    type: types.LOGOUT_REQUEST,
+    type: types.SIGNOUT_REQUEST,
     user,
-    button : 'Log out',
+    button : 'Sign out',
     response: 'Closing session',
     receivedAt: Date.now()
   }
 }
 
-export function logOutSuccess(user) {  
+export function signOutSuccess(user) {  
   return {
-    type: types.LOGOUT_SUCCESS,
+    type: types.SIGNOUT_SUCCESS,
     user,
-    button : 'Log out',
+    button : 'Sign out',
     response: 'Session closed',
     receivedAt: Date.now()
   }
 }
 
-export function logOutFailure(user) {  
+export function signOutFailure(user) {  
   return {
-    type: types.LOGOUT_FAILURE,
+    type: types.SIGNOUT_FAILURE,
     user,
-    button : 'Log out',
+    button : 'Sign out',
     response: 'Failure closing session... Please try it again later.',
     receivedAt: Date.now()
   }
@@ -93,7 +92,7 @@ export function logOutFailure(user) {
 export function loggedIn() {  
   return {
     type: types.LOGGEDIN_REQUEST,
-    response: 'Log in request',
+    response: 'Sign in request',
     receivedAt: Date.now()
   }
 }
@@ -102,7 +101,7 @@ export function loggedInSuccess(user) {
   return {
     type: types.LOGGEDIN_SUCCESS,
     user,
-    response : 'Logged in success',
+    response : 'Sign in success',
     receivedAt: Date.now()
   }
 }
@@ -110,7 +109,7 @@ export function loggedInSuccess(user) {
 export function loggedInFailure() {  
   return {
     type: types.LOGGEDIN_FAILURE,
-    response: 'Failure logged in',
+    response: 'Failure sign in. Yout token is not ok.',
     receivedAt: Date.now()
   }
 }
@@ -127,14 +126,14 @@ export function loggedInFailure() {
   };
 }*/
 
-export function addUserAsync(user) {
+export function signUpAsync(user) {
   return function (dispatch) {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
 
-    dispatch(addUser(user));
+    dispatch(signUp(user));
    
-    return fetch('http://localhost:5000/api/account/register', 
+    return fetch('http://localhost:5000/api/account/signup', 
     {
       method:'POST',
       cache: 'default',
@@ -151,29 +150,25 @@ export function addUserAsync(user) {
       .then(({ userLogged, response }) =>  
       {
         if(response.ok) {
-          
-          // If login was successful, set the token in local storage and dispacth success action
+          // If signin was successful, set the token in local storage and dispacth success action
           localStorage.setItem('jwt', userLogged.token)
-          dispatch(addUserSuccess(userLogged))
-          getProfileAsync(userLogged)
-         
+          dispatch(signUpSuccess(userLogged))
         } else {
-          dispatch(addUserFailure(user,response.statusText))
-      
+          dispatch(signUpFailure(user,response.statusText))
         }
-    }).catch(error => dispatch(addUserFailure(user,error)));
+    }).catch(error => dispatch(signUpFailure(user,error)));
   }
 }
 
 
-export function loginAsync(user) {
+export function signInAsync(user) {
   return function (dispatch) {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
 
-    dispatch(login(user));
+    dispatch(signIn(user));
     
-    return fetch('http://localhost:5000/api/account/login', 
+    return fetch('http://localhost:5000/api/account/signin', 
     {
       method:'POST',
       cache: 'default',
@@ -191,26 +186,26 @@ export function loginAsync(user) {
       {
         if(response.ok) {
           
-          // If login was successful, set the token in local storage and dispacth success action
+          // If signin was successful, set the token in local storage and dispacth success action
           localStorage.setItem('jwt', userLogged.token)
-          dispatch(loginSuccess(userLogged))
+          dispatch(signInSuccess(userLogged))
         } else {
-          dispatch(loginFailure(user,response.statusText))
+          dispatch(signInFailure(user,response.statusText))
         }
-    }).catch(error => dispatch(loginFailure(user,error)));
+    }).catch(error => dispatch(signInFailure(user,error)));
   }
 }
 
 
-export function logoutAsync(user) {
+export function signOutAsync(user) {
   return function (dispatch) {
     try {
-      dispatch(logOut(user));
+      dispatch(signOut(user));
       localStorage.removeItem('jwt');
-      dispatch(logOutSuccess(user));
+      dispatch(signOutSuccess(user));
       }
       catch(err) {
-        dispatch(logOutFailure(user));
+        dispatch(signOutFailure(user));
       }
   }
 }

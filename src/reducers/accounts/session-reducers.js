@@ -6,10 +6,10 @@ import * as types from '../../actions/accounts/action-types';
     didInvalidate: false,
     isAuthenticated: false,
     response: '',
-    button: 'Register'
+    button: ''
   }, action) {
     switch (action.type) {
-      case types.ADD_USER_FAILURE:
+      case types.SIGN_UP_FAILURE:
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: true,
@@ -19,7 +19,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.ADD_USER_REQUEST:
+      case types.SIGN_UP_REQUEST:
         return Object.assign({}, state, {
           isFetching: true,
           didInvalidate: false,
@@ -29,7 +29,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.ADD_USER_SUCCESS:
+      case types.SIGN_UP_SUCCESS:
         
         return Object.assign({}, state, {
           isFetching: false,
@@ -40,7 +40,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-        case types.LOGIN_FAILURE:
+        case types.SIGNIN_FAILURE:
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: true,
@@ -50,7 +50,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.LOGIN_REQUEST:
+      case types.SIGNIN_REQUEST:
         return Object.assign({}, state, {
           isFetching: true,
           didInvalidate: false,
@@ -60,7 +60,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.LOGIN_SUCCESS:
+      case types.SIGNIN_SUCCESS:
         
         return Object.assign({}, state, {
           isFetching: false,
@@ -71,7 +71,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.LOGOUT_REQUEST:
+      case types.SIGNOUT_REQUEST:
         return Object.assign({}, state, {
           isFetching: true,
           didInvalidate: false,
@@ -81,7 +81,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.LOGOUT_SUCCESS:
+      case types.SIGNOUT_SUCCESS:
         
         return Object.assign({}, state, {
           isFetching: false,
@@ -92,7 +92,7 @@ import * as types from '../../actions/accounts/action-types';
           response: action.response,
           lastUpdated: action.receivedAt
         })
-      case types.LOGOUT_FAILURE:
+      case types.SIGNOUT_FAILURE:
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: true,

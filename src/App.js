@@ -19,7 +19,7 @@ class App extends Component {
           <Header 
             isAuthenticated={this.props.isAuthenticated}
             userName={this.props.userName}
-            onClick={this.props.actions.logoutAsync} />
+            onClick={this.props.actions.signOutAsync} />
           <_Main isAuthenticated={this.props.isAuthenticated}/>
         </div>  
     );

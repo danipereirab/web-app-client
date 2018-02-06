@@ -6,7 +6,7 @@ const _HeaderAnon = (props) => {
     return(
         <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <Link className="nav-link" to="/" onClick={onClick}>Log out</Link>
+                <Link className="nav-link" to="/" onClick={onClick}>Sign Out</Link>
             </li>
         </ul>
        

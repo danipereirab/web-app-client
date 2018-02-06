@@ -1,20 +1,18 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-import { BrowserRouter, Route, Redirect, Switch, withRouter} from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
-const Login = (props) => {
+const SignUp = (props) => {
     
     const { handleSubmit, text, response, account, isFetching, button, didInvalidate, isAuthenticated } = props
     if(isAuthenticated){
-        return <Redirect to="/profile"/>
-    }    
-    return(
-          
+        <Redirect to="/profile"/>
+    }
+        return(
             <div className="col-sm-5">
            
                         <b>{text}</b>
                         <form className='form-group' onSubmit={handleSubmit}>
-
                         <Field
                             name="username"
                             component={renderField}
@@ -27,7 +25,24 @@ const Login = (props) => {
                             
                         />
 
-                  
+                        <Field
+                            name="email"
+                            component={renderField}
+                            label="Email"
+                            validate={[required,email]}
+                            warn={aol}
+                            type="email"
+                            placeholder="Email"
+                        />
+                        <Field
+                            name="confirmEmail"
+                            component={renderField}
+                            label="Confirm email"
+                            validate={[required,email]}
+                            warn={aol}
+                            type="email"
+                            placeholder="Repeat Email"
+                        />
                         <Field
                             name="password"
                             component={renderField}
@@ -37,9 +52,18 @@ const Login = (props) => {
                             type="password"
                             placeholder="Password"
                         />
-                  
+                        <Field
+                            name="confirmPassword"
+                            component={renderField}
+                            label="Confirm password"
+                            validate={[required, maxLength15, minLength8]}
+                            warn={aol}
+                            type="password"
+                            placeholder="Repeat password"
+                        />
+                        
                         <button type="submit" disabled={ isFetching}>
-                        {isFetching ? <div> {button} <i className="fa fa-circle-o-notch fa-spin" ></i></div> : 'Log in'}
+                        {isFetching ? <div> {button} <i className="fa fa-circle-o-notch fa-spin" ></i></div> : 'SignUp'}
                         </button>
                         <br/>
                        
@@ -85,6 +109,6 @@ const renderField = ({
 )
 
 
-export default reduxForm(withRouter({
-    form: 'Login'
-}))(Login);
+export default reduxForm({
+    form: 'SignUp'
+})(SignUp);
